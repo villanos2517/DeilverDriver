@@ -9,12 +9,22 @@ public class Dirft : MonoBehaviour
 
     [SerializeField] ParticleSystem smokeLeft;
     [SerializeField] ParticleSystem smokeRight;
+    [SerializeField] TrailRenderer RightTrail;
+    [SerializeField] TrailRenderer LeftTrail;
+    [SerializeField] float turnspeed = (0.1f); //변수 이해
+    [SerializeField] float movespeed = (0.1f); //float,int 구분잘하기
+    [SerializeField] float slowSpeedRatio = 0.5f;
+    [SerializeField] float boostSpeedRatio = 1.5f;
 
+    float slowSpeed;
+    float boostSpeed;
 
     Rigidbody2D rb;
+    AudioSource audioSource;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = rb.GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
@@ -34,18 +44,34 @@ public class Dirft : MonoBehaviour
     {
         float sidewayVelocity = Vector2.Dot(rb.linearVelocity, transform.right);
 
-        bool isDrifting = rb.linearVelocity.magnitude > 2f;
+        bool isDrifting = rb.linearVelocity.magnitude > 2f && Mathf.Abs(sidewayVelocity) > 1f;
         if (isDrifting)
         {
+            if (!audioSource.isPlaying) audioSource.Play();
             if (!smokeLeft.isPlaying) smokeLeft.Play();
             if (!smokeRight.isPlaying) smokeRight.Play();
 
 
         }
-        else 
+        else
         {
+            if (audioSource.isPlaying) audioSource.Stop();
             if (smokeLeft.isPlaying) smokeLeft.Stop();
             if (smokeRight.isPlaying) smokeRight.Stop();
         }
+        LeftTrail.emitting = isDrifting;
+        RightTrail.emitting = isDrifting;
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Boost"))
+        {
+            movespeed = boostSpeed;
+            Debug.Log("boost!!!!!!!!!!!!!");
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        movespeed = slowSpeed;
     }
 }

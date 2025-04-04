@@ -673,10 +673,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: a58800d4-ef69-4b5b-8672-84fba95e0d8b
+  cloudProjectId: c9210930-22db-4ebc-9d5e-3b89e74f0157
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Deilver Driver
+  projectName: DeilverDriver
   organizationId: vahyeon2504
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
