@@ -7,6 +7,10 @@ public class Dirft : MonoBehaviour
     [SerializeField] float steering = 3f; //조향속도
     [SerializeField] float driftFactor = 0.95f; //더 낮을수록 더 미끄러진다
 
+    [SerializeField] ParticleSystem smokeLeft;
+    [SerializeField] ParticleSystem smokeRight;
+
+
     Rigidbody2D rb;
     void Start()
     {
@@ -25,5 +29,23 @@ public class Dirft : MonoBehaviour
         Vector2 forwardVelocity = transform.up * Vector2.Dot(rb.linearVelocity, transform.up);
         Vector2 sideVelocity = transform.right * Vector2.Dot(rb.linearVelocity, transform.right);
         rb.linearVelocity = forwardVelocity + (sideVelocity * driftFactor);
+    }
+    private void Update()
+    {
+        float sidewayVelocity = Vector2.Dot(rb.linearVelocity, transform.right);
+
+        bool isDrifting = rb.linearVelocity.magnitude > 2f;
+        if (isDrifting)
+        {
+            if (!smokeLeft.isPlaying) smokeLeft.Play();
+            if (!smokeRight.isPlaying) smokeRight.Play();
+
+
+        }
+        else 
+        {
+            if (smokeLeft.isPlaying) smokeLeft.Stop();
+            if (smokeRight.isPlaying) smokeRight.Stop();
+        }
     }
 }
