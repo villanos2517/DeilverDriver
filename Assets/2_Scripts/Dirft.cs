@@ -21,24 +21,6 @@ public class Dirft : MonoBehaviour
 
     Rigidbody2D rb;
     AudioSource audioSource;
-
-    public float Accleration { get => accleration; set => accleration = value; }
-    public float Maxspeed { get => maxspeed; set => maxspeed = value; }
-    public float Steering { get => steering; set => steering = value; }
-    public float DriftFactor { get => driftFactor; set => driftFactor = value; }
-    public ParticleSystem SmokeLeft { get => smokeLeft; set => smokeLeft = value; }
-    public ParticleSystem SmokeRight { get => smokeRight; set => smokeRight = value; }
-    public TrailRenderer RightTrail1 { get => RightTrail; set => RightTrail = value; }
-    public TrailRenderer LeftTrail1 { get => LeftTrail; set => LeftTrail = value; }
-    public float Turnspeed { get => turnspeed; set => turnspeed = value; }
-    public float Movespeed { get => movespeed; set => movespeed = value; }
-    public float SlowSpeedRatio { get => slowSpeedRatio; set => slowSpeedRatio = value; }
-    public float BoostSpeedRatio { get => boostSpeedRatio; set => boostSpeedRatio = value; }
-    public float SlowSpeed { get => slowSpeed; set => slowSpeed = value; }
-    public float BoostSpeed { get => boostSpeed; set => boostSpeed = value; }
-    public Rigidbody2D Rb { get => rb; set => rb = value; }
-    public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
